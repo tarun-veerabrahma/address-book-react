@@ -1,0 +1,52 @@
+.tooltip {
+    position: relative;
+    width: 100%;
+  }
+  
+  .tooltip .tooltipText {
+    visibility: hidden;
+    width: 50%;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    word-wrap: break-word;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 2;
+    bottom: 100%;
+    left: 25%;
+  }
+  
+  .tooltip:hover .tooltipText {
+    visibility: visible;
+  }
+  .contactTile{
+	border: 1px solid rgb(204, 204, 204);
+	height: 88px;
+	cursor: pointer;
+}  
+.contactTile >*{
+	padding: 0px 8px;
+	color: rgb(51, 51, 51);
+}
+.contactDetail{
+	width: 95%;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.contactTile.active, .contactTile:hover{
+	background-color: rgb(206, 231, 242);
+	color: black;
+}
+.contactTile .name{
+	font-size: 28px;
+	font-weight: 300;
+}
+.contactTile .details{
+	padding: 5px 0px 5px 16px;
+	font-size: 14px;
+	font-weight: 500;
+}

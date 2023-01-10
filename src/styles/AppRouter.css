@@ -1,0 +1,36 @@
+.navigation {
+	background-color: rgb(51, 51, 51);
+	display: flex;
+	padding: 0px 12px;
+}
+
+.navigationItem{
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.navigation .navigationLink {
+	color: #fffff0;
+    text-decoration: none;
+	font: status-bar;
+	text-align: center;
+	text-transform: uppercase;
+	padding: 4px 12px;
+	font-size: 16px;
+	font-weight: bold;
+	background-color: inherit;
+	border-left: 4px solid rgb(51, 51, 51);
+	margin-right: 2px;
+}
+
+.navigation .navigationLink.active {
+	background-color: rgb(255, 153, 0);
+	color: black;
+	border-left: 4px solid white;
+}
+.navigation .navigationLink:hover{
+	background-color: rgb(255, 153, 0);
+	border-left: 4px solid white;
+}

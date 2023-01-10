@@ -1,0 +1,12 @@
+.contactsPane{
+	padding: 0px 8px;
+	width: 28%;
+}
+.contactsPane .contactsHeading{
+	text-transform: uppercase;
+	font-size: 16px;
+}
+.contacts{
+	list-style: none;
+	padding:0;
+}
