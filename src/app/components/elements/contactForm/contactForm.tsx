@@ -53,12 +53,6 @@ export default class AddContact extends React.Component<IContactFormProps,IConta
     }
 
     formValidation(){
-        // this.validate('name',undefined,this.state.details.name);
-        // this.validate('email',undefined,this.state.details.email);
-        // this.validate('mobile',undefined,this.state.details.mobile);
-        // this.validate('landline',undefined,this.state.details.landline);
-        // this.validate('website',undefined,this.state.details.website);
-        // this.validate('address',undefined,this.state.details.address);
 
         let keys = Object.keys(this.state.details) as PatternKeys[];
         keys.forEach((key)=>{this.validate(key,this.state.details[key])})
@@ -92,76 +86,6 @@ export default class AddContact extends React.Component<IContactFormProps,IConta
         errorMsgs[fieldName]=error;
 
         (error!==this.state.errorMgs[fieldName])?(this.setState({details:details, errorMgs:errorMsgs})):this.setState({details:details});
-        
-        // if(fieldName === 'name'){
-            
-        //     if(error!==this.state.nameErrorMsg){
-        //         this.setState({
-        //             name:value,
-        //             nameErrorMsg:error
-        //         });
-        //     }
-        //     else{
-        //         this.setState({name:value});
-        //     }
-        // }
-        // else if(fieldName === 'email'){
-        //     if(error!==this.state.emailErrorMsg){
-        //         this.setState({
-        //             email:value,
-        //             emailErrorMsg:error
-        //         });
-        //     }
-        //     else{
-        //         this.setState({email:value});
-        //     }
-        // }
-        // else if(fieldName === 'mobile'){
-        //     if(error!==this.state.mobileErrorMsg){
-        //         this.setState({
-        //             mobile:value,
-        //             mobileErrorMsg:error
-        //         });
-        //     }
-        //     else{
-        //         this.setState({mobile:value});
-        //     }
-        // }
-        // else if(fieldName === 'landline'){
-        //     if(error!==this.state.landlineErrorMsg){
-        //         this.setState({
-        //             landline:value,
-        //             landlineErrorMsg:error
-        //         });
-        //     }
-        //     else{
-        //         this.setState({landline:value});
-        //     }
-        // }
-        // else if(fieldName === 'website'){
-        //     if(error!==this.state.websiteErrorMsg){
-        //         this.setState({
-        //             website:value,
-        //             websiteErrorMsg:error
-        //         });
-        //     }
-        //     else{
-        //         this.setState({website:value});
-        //     }
-        // }
-        // else if(fieldName === 'address'){
-        //     if(error!==this.state.addressErrorMsg){
-        //         this.setState({
-        //             address:value,
-        //             addressErrorMsg:error
-        //         });
-        //     }
-        //     else{
-        //         this.setState({address:value});
-        //     }
-        // }
-        
-        
     }
     updateContact(){
         if(this.props.contactDetails!==undefined){
