@@ -7,18 +7,24 @@ export interface IContactFormProps{
     onClick:(data:ContactInfo,Id:number)=>void;
 };
 export interface IContactFormState{
+    details:ContactDetails;
+    navigate:boolean;
+    errorMgs:ErrorMsgs;
+};
+interface ContactDetails{
     name:string;
     email:string;
     mobile:string;
     landline:string;
     website:string;
     address:string;
-    navigate:boolean;
-    nameErrorMsg:string;
-    emailErrorMsg:string;
-    mobileErrorMsg:string;
-    landlineErrorMsg:string;
-    websiteErrorMsg:string;
-    addressErrorMsg:string;
 };
+interface ErrorMsgs{
+    name:string;
+    email:string;
+    mobile:string;
+    landline:string;
+    website:string;
+    address:string;
+}
 
