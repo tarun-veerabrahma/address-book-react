@@ -1,0 +1,40 @@
+@use '../../../colors';
+@use '../../../tooltip';
+@use '../../../fonts';
+
+@mixin contactTileTheme($background:white,$fontColor:black){
+  border: 1px solid colors.$contactTileBorder;
+  background-color: $background;
+  color: $fontColor;
+}
+.contactTile{
+	@include contactTileTheme($fontColor:fonts.$homePageFont);
+	height: 88px;
+	cursor: pointer;
+  .name{
+    font-size: 28px;
+    font-weight: 400;
+  }
+  .details{
+    padding: 5px 0px 5px 16px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+} 
+.contactTile.active, .contactTile:hover{
+	@include contactTileTheme($background:colors.$activeContactTileBackground);
+} 
+.contactTile >*{
+	padding: 0px 8px;
+	color: rgb(51, 51, 51);
+}
+.contactDetail{
+	width: 95%;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  
+  
+}
+

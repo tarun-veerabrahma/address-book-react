@@ -1,10 +1,7 @@
 import React from 'react';
-import '../../../../styles/contactsContainer.css';
+import './contactsContainer.scss';
 import ContactTile from '../contactTile/contactTile';
-
 import { IContactsContainerProps, IContactsContainerState} from './IContactsContainer';
-import { Contact } from '../../views/homePage/IHomePage';
-import { Navigate } from 'react-router-dom';
 
 
 export default class ContactsContainer extends React.Component<IContactsContainerProps, IContactsContainerState>{
@@ -33,21 +30,17 @@ export default class ContactsContainer extends React.Component<IContactsContaine
         this.props.onClick(key);
     }
     render(): React.ReactNode {
-        let contacts:Contact[] = this.state.contacts;
-        let tiles:JSX.Element[] = [];
-        if(contacts.length!==0){
-            for(let i=0;i<contacts.length;i++){
-                tiles.push(<li key={contacts[i].id}><ContactTile isSelected={(contacts[i].id===this.state.selectedContactId)?true:false} name={contacts[i].name} email={contacts[i].email} mobile={contacts[i].mobile} onClick={()=>{this.onClick(contacts[i].id)}}/></li>)
-            }
-        }
-            return (
-                <div className='contactsPane'>
-                    <h3 className='contactsHeading'>Contacts</h3>
-                    <ul className='contacts'>
-                        {tiles}
-                    </ul>
-                    
-                </div>
-            );
+        
+        return (
+            <div className='contactsPane'>
+                <h3 className='contactsHeading'>Contacts</h3>
+                <ul className='contacts'>
+                    {this.state.contacts.map((contact)=>{
+                        return <li key={contact.id}><ContactTile isSelected={contact.id===this.state.selectedContactId} {...contact} onClick={()=>{this.onClick(contact.id)}}/></li>
+                    })}
+                </ul>
+                
+            </div>
+        );
     }
 }

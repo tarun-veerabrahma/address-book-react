@@ -1,0 +1,55 @@
+@use '../../../colors';
+
+
+
+.contactDetailsSection{
+	width: 72%;
+	position: absolute;
+	padding: 28px 0px 20px 64px;
+	color: colors.$detailsSectionFontColor;
+	.contactDetailsHeader{
+		display: flex;
+		width: 80%;
+		.contactDetail{
+			font-weight: 600;
+			font-size: 28px;
+			.detailsSectionLabel{
+				font-size: 16px;
+				margin-right: 4px;
+			}
+			.address{
+				white-space: pre-wrap;
+			}
+		}
+		.options{
+			display: flex;
+			flex-flow: row;
+			.option{
+				display: flex;
+				font-size: 14px;
+				text-transform: uppercase;
+				margin: auto;
+				padding: 0px 20px;
+			}
+			.option >*{
+				cursor: pointer;
+			}
+			.icon{
+				height: 16px;
+				padding: 0px 4px;
+			}
+		}
+	}
+	.contactDetail{
+		display: flex;
+		width: 100%;
+	}
+	.value{
+		display: inline-block;
+		word-wrap: break-word;
+	}
+}
+.contactDetailsSection >*{
+	padding: 8px 0px;
+}
+

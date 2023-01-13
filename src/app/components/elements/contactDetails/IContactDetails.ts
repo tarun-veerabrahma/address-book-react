@@ -1,19 +1,10 @@
-import React from "react";
+import { IContactDetails } from "../../../models/IContactInfo";
+
 export interface IContactDetailsProps{
-    name:string;
-    email:string;
-    mobile:string;
-    landline:string;
-    website:string;
-    address:string;
+    contactToBeDisplayed:IContactDetails
     onEditClicked:()=>void;
     onDeleteClicked:()=>void;
 }
 export interface IContactDetailsState{
-    name:string;
-    email:string;
-    mobile:string;
-    landline:string;
-    website:string;
-    address:string;
+    contactToBeDisplayed:IContactDetails
 }

@@ -1,10 +1,12 @@
+@use '../../../fonts';
+
 .home{
 	display: flex;
     padding: 12px;
-	font-family: "Century Gothic";
+	font-family: fonts.$homePageFont;
 	font-weight: 400;
-    
 }
+
 .rightSection{
 	position: relative;
 	width: 72%;

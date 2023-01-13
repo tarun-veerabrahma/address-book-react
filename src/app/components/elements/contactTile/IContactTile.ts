@@ -1,6 +1,3 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
 export interface IContactTileProps{
     name:string;
     email:string;

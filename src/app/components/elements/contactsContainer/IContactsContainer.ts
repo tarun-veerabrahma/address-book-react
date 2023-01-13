@@ -1,22 +1,13 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ContactInfo } from '../../../data/IContactInfo';
+import { IContactInfo } from '../../../models/IContactInfo';
+
 export interface IContactsContainerProps{
-    contacts: Contact[];
+    contacts: IContactInfo[];
     newContactId?:number;
     onClick:(id:number)=>void;
 }
-interface Contact{
-    id:number;
-    name:string;
-    email:string;
-    mobile:string;
-    landline:string;
-    website:string;
-    address:string;
-}
+
 export interface IContactsContainerState{
-    contacts: Contact[]|[];
+    contacts: IContactInfo[]|[];
     selectedContactId:number;
     id:number;
 }

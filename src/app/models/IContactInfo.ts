@@ -1,6 +1,4 @@
-import React from 'react';
-
-export interface ContactInfo{
+export interface IContactInfo{
     id:number;
     name:string;
     email:string;
@@ -10,7 +8,7 @@ export interface ContactInfo{
     address:string;
 }
 
-export interface PatternsType{
+export interface IContactDetails{
     name:string;
     email:string;
     mobile:string;
@@ -19,4 +17,4 @@ export interface PatternsType{
     address:string;
 }
 
-export type PatternKeys = 'name'|'email'|'mobile'|'landline'|'website'|'address';
+export type PatternKeys = 'id'|'name'|'email'|'mobile'|'landline'|'website'|'address';

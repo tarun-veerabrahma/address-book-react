@@ -1,0 +1,25 @@
+@use 'colors';
+.tooltip {
+    position: relative;
+    width: 100%;
+    .tooltipText {
+        visibility: hidden;
+        width: 50%;
+        background-color: colors.$tooltipBackground;
+        color: colors.$tooltipFontColor;
+        text-align: center;
+        word-wrap: break-word;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 2;
+        bottom: 100%;
+        left: 25%;
+      }
+  }
+  
+  .tooltip:hover{
+    .tooltipText {
+        visibility: visible;
+      }
+  } 

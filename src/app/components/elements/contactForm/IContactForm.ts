@@ -1,30 +1,15 @@
-import { ContactInfo } from "../../../data/IContactInfo";
-import { Contact } from "../../views/homePage/IHomePage";
+import { IContactInfo,IContactDetails } from "../../../models/IContactInfo";
 
 export interface IContactFormProps{
     id?:number;
-    contactDetails?:Contact;
-    onClick:(data:ContactInfo,Id:number)=>void;
+    contactDetails?:IContactInfo;
+    onClick:(data:IContactInfo,Id:number,cancel?:boolean)=>void;
 };
 export interface IContactFormState{
-    details:ContactDetails;
+    details:IContactDetails;
     navigate:boolean;
-    errorMgs:ErrorMsgs;
+    errorMgs:IContactDetails;
 };
-interface ContactDetails{
-    name:string;
-    email:string;
-    mobile:string;
-    landline:string;
-    website:string;
-    address:string;
-};
-interface ErrorMsgs{
-    name:string;
-    email:string;
-    mobile:string;
-    landline:string;
-    website:string;
-    address:string;
-}
+
+
 
