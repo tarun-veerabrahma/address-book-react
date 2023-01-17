@@ -7,32 +7,8 @@ import { IContactFormProps,IContactFormState } from './IContactForm';
 import { patterns} from '../../../models/constants';
 import { IContactInfo } from '../../../models/IContactInfo';
 import { emptyDetails } from '../../../models/constants';
+
 export default function AddContact(props:IContactFormProps){
-    
-    
-    // constructor(props:IContactFormProps){
-    //     super(props);
-    //     this.state = {
-    //         details:{
-    //             name:"",
-    //             email:"",
-    //             mobile:"",
-    //             landline:"",
-    //             website:"",
-    //             address:""
-    //         },
-    //         navigate:false,
-    //         errorMgs:{
-    //             name:"",
-    //             email:"",
-    //             mobile:"",
-    //             landline:"",
-    //             website:"",
-    //             address:""
-    //         }
-    //     }
-    //     this.formValidation = this.formValidation.bind(this)
-    // }
     const [details,setDetails] = useState<IContactDetails>(emptyDetails);
     const [navigate,setNavigate] = useState<boolean>(false);
     const [errorMsgs,setErrorMsgs] = useState<IContactDetails>({
@@ -50,13 +26,8 @@ export default function AddContact(props:IContactFormProps){
         }   
     },[props.contactDetails]);
 
-    // componentDidMount(): void {
-    //     if(this.props.contactDetails){
-    //         this.setState({
-    //             details:this.props.contactDetails
-    //         })
-    //     }
-    // }
+    let tempErrorMsgs = {...errorMsgs}
+    let tempDetails = {...details}
 
     const formValidation=()=>{
         let flag=true;
@@ -80,8 +51,7 @@ export default function AddContact(props:IContactFormProps){
             let error='';
             (value.match(patterns[fieldName]))?error= '':(value==='')?error= fieldName.charAt(0).toUpperCase()+fieldName.slice(1)+' is required':error= 'Invalid '+ fieldName;
             
-            let tempDetails={...details};
-            let tempErrorMsgs = {...errorMsgs};
+            
             tempDetails[fieldName]=value;
             tempErrorMsgs[fieldName]=error;
     
