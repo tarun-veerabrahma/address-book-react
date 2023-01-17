@@ -106,13 +106,13 @@ export default class AddContact extends React.Component<IContactFormProps,IConta
             <div className='addContactForm'>
             <div className='fieldsContainer'>
             <TextField errorMessage={this.state.errorMgs.name} onChange={(event,newValue)=>{this.validate('name',newValue as string)}} className='contactFormField' label='Name' required defaultValue={this.props.contactDetails?.name}/>
-            <TextField errorMessage={this.state.errorMgs.email} onChange={(event)=>{this.validate('email',(event.target as HTMLInputElement).value)}} className='contactFormField' label='Email' required defaultValue={this.props.contactDetails?.email}/>
+            <TextField errorMessage={this.state.errorMgs.email} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Email' required defaultValue={this.props.contactDetails?.email}/>
             <div className='row'>
-                <TextField errorMessage={this.state.errorMgs.mobile} onChange={(event)=>{this.validate('mobile',(event.target as HTMLInputElement).value)}} className='contactFormField' label='Mobile' required defaultValue={this.props.contactDetails?.mobile}/>
-                <TextField errorMessage={this.state.errorMgs.landline} onChange={(event)=>{this.validate('landline',(event.target as HTMLInputElement).value)}} className='contactFormField' label='Landline' required defaultValue={this.props.contactDetails?.landline}/>
+                <TextField errorMessage={this.state.errorMgs.mobile} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Mobile' required defaultValue={this.props.contactDetails?.mobile}/>
+                <TextField errorMessage={this.state.errorMgs.landline} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Landline' required defaultValue={this.props.contactDetails?.landline}/>
             </div>
-            <TextField errorMessage={this.state.errorMgs.website} onChange={(event)=>{this.validate('website',(event.target as HTMLInputElement).value)}} className='contactFormField' label='Website' required defaultValue={this.props.contactDetails?.website}/>
-            <TextField errorMessage={this.state.errorMgs.address} onChange={(event)=>{this.validate('address',(event.target as HTMLInputElement|HTMLTextAreaElement).value)}} className='contactFormField' label='Address' required defaultValue={this.props.contactDetails?.address} multiline rows={4} autoAdjustHeight/>
+            <TextField errorMessage={this.state.errorMgs.website} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Website' required defaultValue={this.props.contactDetails?.website}/>
+            <TextField errorMessage={this.state.errorMgs.address} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Address' required defaultValue={this.props.contactDetails?.address} multiline rows={4} autoAdjustHeight/>
            </div>
            <div className='buttons'>
             {(!this.props.contactDetails)?<div className='rightChild'><Link to='/'><DefaultButton className='button' text='Cancel'/></Link></div>:<div className='rightChild'><DefaultButton className='button' text='Cancel' onClick={()=>this.props.onClick(this.props.contactDetails as IContactInfo,0,true)}/></div>}
