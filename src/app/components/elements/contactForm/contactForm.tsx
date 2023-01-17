@@ -1,125 +1,138 @@
 import { DefaultButton, TextField } from '@fluentui/react';
 import './contactForm.scss'
-import React from 'react';
-import { PatternKeys} from '../../../models/IContactInfo';
+import React, { useEffect, useState } from 'react';
+import { IContactDetails, PatternKeys} from '../../../models/IContactInfo';
 import { Link, Navigate } from 'react-router-dom';
 import { IContactFormProps,IContactFormState } from './IContactForm';
 import { patterns} from '../../../models/constants';
 import { IContactInfo } from '../../../models/IContactInfo';
+import { emptyDetails } from '../../../models/constants';
+export default function AddContact(props:IContactFormProps){
+    
+    
+    // constructor(props:IContactFormProps){
+    //     super(props);
+    //     this.state = {
+    //         details:{
+    //             name:"",
+    //             email:"",
+    //             mobile:"",
+    //             landline:"",
+    //             website:"",
+    //             address:""
+    //         },
+    //         navigate:false,
+    //         errorMgs:{
+    //             name:"",
+    //             email:"",
+    //             mobile:"",
+    //             landline:"",
+    //             website:"",
+    //             address:""
+    //         }
+    //     }
+    //     this.formValidation = this.formValidation.bind(this)
+    // }
+    const [details,setDetails] = useState<IContactDetails>(emptyDetails);
+    const [navigate,setNavigate] = useState<boolean>(false);
+    const [errorMsgs,setErrorMsgs] = useState<IContactDetails>({
+                    name:"",
+                    email:"",
+                    mobile:"",
+                    landline:"",
+                    website:"",
+                    address:""
+                });
+    
+    useEffect(()=>{
+        if(props.contactDetails){
+            setDetails(props.contactDetails);
+        }   
+    },[props.contactDetails]);
 
-export default class AddContact extends React.Component<IContactFormProps,IContactFormState>{
-    
-    
-    constructor(props:IContactFormProps){
-        super(props);
-        this.state = {
-            details:{
-                name:"",
-                email:"",
-                mobile:"",
-                landline:"",
-                website:"",
-                address:""
-            },
-            navigate:false,
-            errorMgs:{
-                name:"",
-                email:"",
-                mobile:"",
-                landline:"",
-                website:"",
-                address:""
-            }
-        }
-        this.formValidation = this.formValidation.bind(this)
-    }
-    
-    componentDidMount(): void {
-        if(this.props.contactDetails){
-            this.setState({
-                details:this.props.contactDetails
-            })
-        }
-    }
+    // componentDidMount(): void {
+    //     if(this.props.contactDetails){
+    //         this.setState({
+    //             details:this.props.contactDetails
+    //         })
+    //     }
+    // }
 
-    formValidation(){
+    const formValidation=()=>{
         let flag=true;
-        (Object.keys(this.state.details) as PatternKeys[]).forEach((key)=>{if(key!=='id'){if(flag){flag=this.validate(key,this.state.details[key])}else{this.validate(key,this.state.details[key])}}})
+        (Object.keys(details) as PatternKeys[]).forEach((key)=>{if(key!=='id'){if(flag){flag=validate(key,details[key])}else{validate(key,details[key])}}})
         
         if(flag){
-            if(this.props.contactDetails!==undefined){
-                this.updateContact();
+            if(props.contactDetails!==undefined){
+                updateContact();
             }
             else{
-                this.addNewContact();
-                this.setState({
-                    navigate:true
-                })
+                addNewContact();
+                setNavigate(true);
             }
         }
     }
 
 
 
-    validate(fieldName: PatternKeys,  value:string):boolean{
+    const validate = (fieldName: PatternKeys,  value:string):boolean=>{
         if(fieldName!=='id'){
             let error='';
             (value.match(patterns[fieldName]))?error= '':(value==='')?error= fieldName.charAt(0).toUpperCase()+fieldName.slice(1)+' is required':error= 'Invalid '+ fieldName;
             
-            let details=this.state.details;
-            let errorMsgs = this.state.errorMgs;
-            details[fieldName]=value;
-            errorMsgs[fieldName]=error;
+            let tempDetails={...details};
+            let tempErrorMsgs = {...errorMsgs};
+            tempDetails[fieldName]=value;
+            tempErrorMsgs[fieldName]=error;
     
-            (error!==this.state.errorMgs[fieldName])?(this.setState({details:details, errorMgs:errorMsgs})):this.setState({details:details});
+            setDetails(tempDetails); 
+            setErrorMsgs(tempErrorMsgs);
             
             return (error!=='')?false:true
         }
        return true
         
     }
-    updateContact(){
-        if(this.props.contactDetails!==undefined){
+    const updateContact=()=>{
+        if(props.contactDetails!==undefined){
             let contact:IContactInfo={
-                id:this.props.contactDetails.id,
-                ...this.state.details
+                id:props.contactDetails.id,
+                ...details
             }
-            this.props.onClick(contact,contact.id);
+            props.onClick(contact,contact.id);
         }
     }
 
     
     
 
-    addNewContact(){
-        if(this.props.id!==undefined){
+    const addNewContact=()=>{
+        if(props.id!==undefined){
             let contact:IContactInfo = {
-                id: this.props.id+1,
-                ...this.state.details
+                id: props.id+1,
+                ...details
             }
-            this.props.onClick(contact,this.props.id+1);
+            props.onClick(contact,props.id+1);
         }
     }
 
-    render(): React.ReactNode {
-        return(
-            <div className='addContactForm'>
-            <div className='fieldsContainer'>
-            <TextField errorMessage={this.state.errorMgs.name} onChange={(event,newValue)=>{this.validate('name',newValue as string)}} className='contactFormField' label='Name' required defaultValue={this.props.contactDetails?.name}/>
-            <TextField errorMessage={this.state.errorMgs.email} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Email' required defaultValue={this.props.contactDetails?.email}/>
-            <div className='row'>
-                <TextField errorMessage={this.state.errorMgs.mobile} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Mobile' required defaultValue={this.props.contactDetails?.mobile}/>
-                <TextField errorMessage={this.state.errorMgs.landline} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Landline' required defaultValue={this.props.contactDetails?.landline}/>
-            </div>
-            <TextField errorMessage={this.state.errorMgs.website} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Website' required defaultValue={this.props.contactDetails?.website}/>
-            <TextField errorMessage={this.state.errorMgs.address} onChange={(event,newValue)=>{this.validate('email',newValue as string)}} className='contactFormField' label='Address' required defaultValue={this.props.contactDetails?.address} multiline rows={4} autoAdjustHeight/>
-           </div>
-           <div className='buttons'>
-            {(!this.props.contactDetails)?<div className='rightChild'><Link to='/'><DefaultButton className='button' text='Cancel'/></Link></div>:<div className='rightChild'><DefaultButton className='button' text='Cancel' onClick={()=>this.props.onClick(this.props.contactDetails as IContactInfo,0,true)}/></div>}
-            {(!this.props.contactDetails)?<div className='rightChild'><DefaultButton className='button submit' text='Add' onClick={this.formValidation}/></div>:<div className='rightChild'><DefaultButton className='button submit' text='Save' onClick={this.formValidation}/></div>}
-           </div>
-            {this.state.navigate && <Navigate to={'/'}/>}
-           </div>
-        );
-    }
+    return(
+        <div className='addContactForm'>
+        <div className='fieldsContainer'>
+        <TextField errorMessage={errorMsgs.name} onChange={(event,newValue)=>{validate('name',newValue as string)}} className='contactFormField' label='Name' required defaultValue={props.contactDetails?.name}/>
+        <TextField errorMessage={errorMsgs.email} onChange={(event,newValue)=>{validate('email',newValue as string)}} className='contactFormField' label='Email' required defaultValue={props.contactDetails?.email}/>
+        <div className='row'>
+            <TextField errorMessage={errorMsgs.mobile} onChange={(event,newValue)=>{validate('mobile',newValue as string)}} className='contactFormField' label='Mobile' required defaultValue={props.contactDetails?.mobile}/>
+            <TextField errorMessage={errorMsgs.landline} onChange={(event,newValue)=>{validate('landline',newValue as string)}} className='contactFormField' label='Landline' required defaultValue={props.contactDetails?.landline}/>
+        </div>
+        <TextField errorMessage={errorMsgs.website} onChange={(event,newValue)=>{validate('website',newValue as string)}} className='contactFormField' label='Website' required defaultValue={props.contactDetails?.website}/>
+        <TextField errorMessage={errorMsgs.address} onChange={(event,newValue)=>{validate('address',newValue as string)}} className='contactFormField' label='Address' required defaultValue={props.contactDetails?.address} multiline rows={4} autoAdjustHeight/>
+        </div>
+        <div className='buttons'>
+        {(!props.contactDetails)?<div className='rightChild'><Link to='/'><DefaultButton className='button' text='Cancel'/></Link></div>:<div className='rightChild'><DefaultButton className='button' text='Cancel' onClick={()=>props.onClick(props.contactDetails as IContactInfo,0,true)}/></div>}
+        {(!props.contactDetails)?<div className='rightChild'><DefaultButton className='button submit' text='Add' onClick={formValidation}/></div>:<div className='rightChild'><DefaultButton className='button submit' text='Save' onClick={formValidation}/></div>}
+        </div>
+        {navigate && <Navigate to={'/'}/>}
+        </div>
+    );
 }

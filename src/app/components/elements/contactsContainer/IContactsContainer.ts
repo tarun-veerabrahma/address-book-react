@@ -9,6 +9,5 @@ export interface IContactsContainerProps{
 export interface IContactsContainerState{
     contacts: IContactInfo[]|[];
     selectedContactId:number;
-    id:number;
 }
 

@@ -16,3 +16,21 @@ export const emptyContactObject:IContactInfo = {
     website:'',
     address:''
 }
+
+export const emptyDetails:IContactDetails = {
+    name:'',
+    email:'',
+    mobile:'',
+    landline:'',
+    website:'',
+    address:''
+}
+
+export const emptyErrors:IContactDetails = {
+    name:'',
+    email:'',
+    mobile:'',
+    landline:'',
+    website:'',
+    address:''
+}

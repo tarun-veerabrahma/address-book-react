@@ -17,4 +17,13 @@ export interface IContactDetails{
     address:string;
 }
 
+export interface IFieldErrors{
+    nameError:string;
+    emailError:string;
+    mobileError:string;
+    landlineError:string;
+    websiteError:string;
+    addressError:string;
+}
+
 export type PatternKeys = 'id'|'name'|'email'|'mobile'|'landline'|'website'|'address';
