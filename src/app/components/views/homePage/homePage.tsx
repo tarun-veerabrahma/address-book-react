@@ -8,15 +8,8 @@ import ContactDetails from '../../elements/contactDetails/contactDetails';
 export default function Home(props:IHomePageProps){
     const [contacts,setContacts]=useState<IContactInfo[]>([]);
     const [uniqueId,setUniqueId] = useState<number>(0);
-    const [selectedContactId,setSelectedContactId] = useState<number|undefined>(undefined);
+    const [selectedContactId,setSelectedContactId] = useState<number|undefined>();
     const [isEditClicked,setIsEditClicked] = useState<boolean>(false);
-    
-    // const [homeState,setHomeState] = useState<IHomePageState>({
-    //     contacts:[],
-    //     uniqueId:0,
-    //     selectedContactId:undefined,
-    //     isEditClicked: false
-    // })
     
     const addContact=(data: IContactInfo,Id:number)=>{
         let tempContacts = contacts;//creating a copy for maintaining immutability
@@ -24,28 +17,14 @@ export default function Home(props:IHomePageProps){
         setContacts(tempContacts);
         setUniqueId(Id);
         setSelectedContactId(Id);
-        // setHomeState({
-        //     ...homeState,
-        //     contacts:tempContacts,
-        //     uniqueId:Id,
-        //     selectedContactId:Id
-        // })
     }
 
     const displayContactDetails=(id: number)=>{
         setUniqueId(id);
-        // setHomeState({
-        //     ...homeState,
-        //     selectedContactId:id
-        // })
     }
 
     const handleEdit=()=>{
         setIsEditClicked(true);
-        // setHomeState({
-        //     ...homeState,
-        //     isEditClicked:true
-        // })
     }
     const checkId=(contact:IContactInfo,index:number)=>{
         if(contact.id === selectedContactId){
@@ -57,40 +36,22 @@ export default function Home(props:IHomePageProps){
     const deleteContact=()=>{
         let tempContacts=contacts.filter(checkId);
         setContacts(tempContacts);
-        // setHomeState({
-        //     ...homeState,
-        //     contacts:homeState.contacts.filter(checkId)
-             
-        // })
-        
     }
     const setContactDetails=(i:number)=>{
         if(contacts.length === 1){
             setSelectedContactId(undefined);
-            // setHomeState({
-            //     ...homeState,
-            //     selectedContactId:undefined
-            // })
         }
         else{
             if(i>=contacts.length - 1){
                 i = contacts.length - 2;
             }
             setSelectedContactId(contacts[i].id);
-            // setHomeState({
-            //     ...homeState,
-            //     selectedContactId:contacts[i].id
-            // })
         } 
     }
 
     const updateContact=(data:IContactInfo, Id:number, cancel?:boolean)=>{
         if(cancel){
             setIsEditClicked(false);
-            // setHomeState({
-            //     ...homeState,
-            //     isEditClicked:false
-            // })
         }
         else{
             setContacts(contacts.map((contact)=>{
@@ -100,16 +61,6 @@ export default function Home(props:IHomePageProps){
                 return contact
             }));
             setIsEditClicked(false);
-            // setHomeState({
-            //     ...homeState,
-            //     contacts:homeState.contacts.map((contact)=>{
-            //         if(contact.id===Id){
-            //             return data
-            //         }
-            //         return contact
-            //     }),
-            //     isEditClicked:false
-            // })
         }
         
     }
